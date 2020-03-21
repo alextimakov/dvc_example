@@ -1,4 +1,10 @@
-['remote "myremote"']
-url = /tmp/dvc-storage
 [core]
-remote = myremote
+    remote = myremote
+['remote "myremote"']
+    url = /tmp/dvc-storage
+['remote "sshremote"']
+    url = ssh://ssh://username@ip/home/path/to/project
+    port = 22
+    user = username
+    keyfile = path/to/keyfile
+    ask_password = true
