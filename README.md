@@ -45,12 +45,14 @@ echo "os.umask(0o002)" >> dev_folder/.jupyter/jupyter_notebook_config.py
 - Коммитим изменения в проекте: `git commit -m 'added dvc for dataset versioning'`
 - Добавляем нужный удалённый репозиторий для хранения файлов (в нашем случае - SSH к единому серверу):
 ```shell script
-dvc remote add sshremote ssh://username@ip/home/path/to/project
-dvc remote modify sshremote port 22
+dvc remote add --local sshremote ssh://username@ip/home/path/to/project
+dvc remote modify --local sshremote port 22
 dvc remote modify --local sshremote user username
-dvc remote modify sshremote keyfile path/to/keyfile
-dvc remote modify sshremote ask_password true
+dvc remote modify --local sshremote keyfile path/to/keyfile
+dvc remote modify --local sshremote ask_password true
 ```
 - Отправляем добавленные данные в удалённый репозиторий: `dvc push -r sshremote`
 3. Дальнейший workflow:
+- В данном случае dataset registry - это именно удалённый git репозиторий
+- Чтобы посмотреть текущее содержимое data registry: `dvc list -R link_to_git`
 - dvc get | dvc import | dvc update
